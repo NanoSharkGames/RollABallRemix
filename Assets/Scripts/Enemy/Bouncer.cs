@@ -8,9 +8,10 @@ public class Bouncer : Enemy
 
     protected override void PlayerImpact(Player player)
     {
+        base.PlayerImpact(player);
+
         Vector3 moveDirection = player.transform.position - transform.position;
 
-        //base.PlayerImpact(player);
         player.Knockback(moveDirection.normalized, _knockbackSpeed);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BallMotor))]
 public class Player : MonoBehaviour
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
     int _currentHealth;
 
     [SerializeField] Inventory _inventory;
+
+    [SerializeField] Text _healthText;
 
     BallMotor _ballMotor;
 
@@ -30,6 +33,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _currentHealth = _maxHealth;
+
+        _healthText.text = "HP: " + _currentHealth + "/" + _maxHealth;
     }
 
     private void FixedUpdate()
@@ -53,6 +58,7 @@ public class Player : MonoBehaviour
         _currentHealth += amount;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
         Debug.Log("Player's health: " + _currentHealth);
+        _healthText.text = "HP: " + _currentHealth + "/" + _maxHealth;
     }
 
     public void DecreaseHealth(int amount)
@@ -61,6 +67,7 @@ public class Player : MonoBehaviour
         {
             _currentHealth -= amount;
             Debug.Log("Player's health: " + _currentHealth);
+            _healthText.text = "HP: " + _currentHealth + "/" + _maxHealth;
             if (_currentHealth <= 0)
             {
                 Kill();
